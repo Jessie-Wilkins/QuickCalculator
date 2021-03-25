@@ -2,6 +2,7 @@
 
 mod addition;
 mod subtraction;
+mod division;
 
 
 #[cfg(test)]
