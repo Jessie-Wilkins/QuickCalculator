@@ -1,5 +1,5 @@
 #[allow(dead_code)]
-fn multiply_two(first: i32, second: i32) -> i32{
+pub fn multiply_two(first: i32, second: i32) -> i32{
     let product = first*second;
     product
 }

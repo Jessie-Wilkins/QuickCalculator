@@ -1,5 +1,5 @@
 #[allow(dead_code)]
-fn add_two(first: i32, second: i32) -> i32{
+pub fn add_two(first: i32, second: i32) -> i32{
     first+second
 }
 

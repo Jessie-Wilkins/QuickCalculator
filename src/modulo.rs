@@ -1,5 +1,5 @@
 #[allow(dead_code)]
-fn modulo_two(first: i32, second: i32) -> i32{
+pub fn modulo_two(first: i32, second: i32) -> i32{
     let remainder = first%second;
     remainder
 }
