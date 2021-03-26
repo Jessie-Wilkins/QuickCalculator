@@ -1,6 +1,6 @@
 #[allow(dead_code)]
 fn divide_two(first: i32, second: i32) -> f32{
-    let quotient : f32 = first/second;
+    let quotient : f32 = first as f32 / second as f32;
     quotient
 }
 
