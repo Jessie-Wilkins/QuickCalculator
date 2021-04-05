@@ -1,10 +1,12 @@
 #[allow(dead_code)]
-mod multi_operations {
-    use crate::addition::add_two;
-    use crate::subtraction::subtract_two;
-    use crate::multiplication::multiply_two;
-    use crate::division::divide_two;
-    use crate::modulo::modulo_two;
+
+
+pub mod multi_operations {
+    pub use crate::addition::add_two;
+    pub use crate::subtraction::subtract_two;
+    pub use crate::multiplication::multiply_two;
+    pub use crate::division::divide_two;
+    pub use crate::modulo::modulo_two;
 
     pub fn calculate_basics(first: i32, second: i32) -> (i32, i32, i32, f32, i32){
         let sum = add_two(first, second);

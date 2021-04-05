@@ -5,7 +5,7 @@ pub fn divide_two(first: i32, second: i32) -> f32{
        0.0
     }
     else {
-    quotient
+        quotient
     }
 }
 
