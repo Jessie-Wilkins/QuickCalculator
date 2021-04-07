@@ -8,7 +8,16 @@ mod multiplication;
 mod modulo;
 
 use crate::master_operator::multi_operations::multi_input_basic_calculation_processor;
+use std::env;
+
 
 fn main() {
-    println!("{}", multi_input_basic_calculation_processor("5", "2"));
+
+    let args: Vec<String> = env::args().collect();
+
+    let first_number = &args[1];
+    let second_number = &args[2];
+
+
+    println!("{}", multi_input_basic_calculation_processor(first_number, second_number));
 }
