@@ -18,6 +18,18 @@ pub mod multi_operations {
         (sum, difference, product, quotient, remainder)
     }
 
+    pub fn calculate_basics_switched(first: i32, second: i32) -> (i32, i32, i32, i32, f32, f32, i32, i32) {
+        let sum = add_two(first, second);
+        let difference1 = subtract_two(first, second);
+        let difference2 = subtract_two(second, first);
+        let product = multiply_two(first, second);
+        let quotient1 = divide_two(first, second);
+        let quotient2 = divide_two(second, first);
+        let remainder = modulo_two(first, second);
+
+        (sum, difference1, difference2, product, quotient1, quotient2, remainder)
+    }
+
     pub fn multi_answer_printer(tuple_answers : (i32, i32, i32, f32, i32)) -> String {
         let mut answer_string = "Sum: ".to_string()+&tuple_answers.0.to_string()+&"\n".to_string();
         answer_string += &("Difference: ".to_string()+&tuple_answers.1.to_string()+&"\n".to_string());
@@ -87,5 +99,11 @@ mod tests {
     fn multi_user_input_processing_returns_string_answers() {
         let formatted_answer = multi_input_basic_calculation_processor("5", "2");
         assert_eq!(formatted_answer, "Sum: 7\nDifference: 3\nProduct: 10\nQuotient: 2.5\nRemainder: 1")
+    }
+
+    #[test]
+    fn calculate_basics_switched_can_return_all_correct_values_for_switched_and_unswitched_answers() {
+        let tuple_answers = calculate_basics_switched(4, 2);
+        assert_eq!(tuple_answers, (6, 2, -2, 8, 2.0, 0.5, 0, 2));
     }
 }
