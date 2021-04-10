@@ -25,9 +25,10 @@ pub mod multi_operations {
         let product = multiply_two(first, second);
         let quotient1 = divide_two(first, second);
         let quotient2 = divide_two(second, first);
-        let remainder = modulo_two(first, second);
+        let remainder1 = modulo_two(first, second);
+        let remainder2 = modulo_two(second, first);
 
-        (sum, difference1, difference2, product, quotient1, quotient2, remainder)
+        (sum, difference1, difference2, product, quotient1, quotient2, remainder1, remainder2)
     }
 
     pub fn multi_answer_printer(tuple_answers : (i32, i32, i32, f32, i32)) -> String {
@@ -37,6 +38,22 @@ pub mod multi_operations {
         answer_string += &("Quotient: ".to_string()+&tuple_answers.3.to_string()+&"\n".to_string());
         answer_string += &("Remainder: ".to_string()+&tuple_answers.4.to_string());
         answer_string
+    }
+
+    pub fn multi_answer_printer_switched(first: i32, second: i32, tuple_answers : (i32, i32, i32, i32, f32, f32, i32, i32)) -> String {
+        let mut answer_string = tuple_string_formatter_switched(first, second, "Sum" ,tuple_answers);
+        answer_string += &("Difference (".to_string()+&first.to_string()+&"-".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.1.to_string()+&"\n".to_string());
+        answer_string += &("Difference (".to_string()+&second.to_string()+&"-".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.2.to_string()+&"\n".to_string());
+        answer_string += &("Product: ".to_string()+&tuple_answers.3.to_string()+&"\n".to_string());
+        answer_string += &("Quotient (".to_string()+&first.to_string()+&"/".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.4.to_string()+&"\n".to_string());
+        answer_string += &("Quotient (".to_string()+&second.to_string()+&"/".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.5.to_string()+&"\n".to_string());
+        answer_string += &("Remainder (".to_string()+&first.to_string()+&"%".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.6.to_string()+&"\n".to_string());
+        answer_string += &("Remainder (".to_string()+&second.to_string()+&"%".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.7.to_string());
+        answer_string
+    }
+
+    fn tuple_string_formatter_switched(first: i32, second: i32, operation: &str, tuple_answers: (i32, i32, i32, i32, f32, f32, i32, i32)) -> String {
+        "Sum: ".to_string()+&tuple_answers.0.to_string()+&"\n".to_string()
     }
 
     pub fn convert_strings_to_ints(first: &str, second: &str) -> [i32; 2] {
@@ -105,5 +122,11 @@ mod tests {
     fn calculate_basics_switched_can_return_all_correct_values_for_switched_and_unswitched_answers() {
         let tuple_answers = calculate_basics_switched(4, 2);
         assert_eq!(tuple_answers, (6, 2, -2, 8, 2.0, 0.5, 0, 2));
+    }
+
+    #[test]
+    fn multi_answer_switched_printer_prints_all_answers_switched_and_unswitched() {
+        let formatted_answer = multi_answer_printer_switched(4, 2, calculate_basics_switched(4, 2));
+        assert_eq!(formatted_answer, "Sum: 6\nDifference (4-2): 2\nDifference (2-4): -2\nProduct: 8\nQuotient (4/2): 2\nQuotient (2/4): 0.5\nRemainder (4%2): 0\nRemainder (2%4): 2");
     }
 }
