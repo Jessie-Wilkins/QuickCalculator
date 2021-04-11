@@ -41,19 +41,47 @@ pub mod multi_operations {
     }
 
     pub fn multi_answer_printer_switched(first: i32, second: i32, tuple_answers : (i32, i32, i32, i32, f32, f32, i32, i32)) -> String {
-        let mut answer_string = tuple_string_formatter_switched(first, second, "Sum" ,tuple_answers);
-        answer_string += &("Difference (".to_string()+&first.to_string()+&"-".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.1.to_string()+&"\n".to_string());
-        answer_string += &("Difference (".to_string()+&second.to_string()+&"-".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.2.to_string()+&"\n".to_string());
-        answer_string += &("Product: ".to_string()+&tuple_answers.3.to_string()+&"\n".to_string());
-        answer_string += &("Quotient (".to_string()+&first.to_string()+&"/".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.4.to_string()+&"\n".to_string());
-        answer_string += &("Quotient (".to_string()+&second.to_string()+&"/".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.5.to_string()+&"\n".to_string());
-        answer_string += &("Remainder (".to_string()+&first.to_string()+&"%".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.6.to_string()+&"\n".to_string());
-        answer_string += &("Remainder (".to_string()+&second.to_string()+&"%".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.7.to_string());
+        let mut answer_string = tuple_string_formatter_switched(first, second, "Sum" , 0, tuple_answers);
+        answer_string += &tuple_string_formatter_switched(first, second, "Difference" , 1, tuple_answers);
+        answer_string += &tuple_string_formatter_switched(first, second, "Difference" , 2, tuple_answers);
+        answer_string += &tuple_string_formatter_switched(first, second, "Product" , 3, tuple_answers);
+        answer_string += &tuple_string_formatter_switched(first, second, "Quotient" , 4, tuple_answers);
+        answer_string += &tuple_string_formatter_switched(first, second, "Quotient" , 5, tuple_answers);
+        answer_string += &tuple_string_formatter_switched(first, second, "Remainder" , 6, tuple_answers);
+        answer_string += &tuple_string_formatter_switched(first, second, "Remainder" , 7, tuple_answers);
         answer_string
     }
 
-    fn tuple_string_formatter_switched(first: i32, second: i32, operation: &str, tuple_answers: (i32, i32, i32, i32, f32, f32, i32, i32)) -> String {
-        "Sum: ".to_string()+&tuple_answers.0.to_string()+&"\n".to_string()
+    fn tuple_string_formatter_switched(first: i32, second: i32, operation: &str, index: i32, tuple_answers: (i32, i32, i32, i32, f32, f32, i32, i32)) -> String {
+
+        let mut tuple_element_string = "temp".to_string();
+
+        if index == 0 {
+            tuple_element_string = ": ".to_string()+&tuple_answers.0.to_string()+&"\n".to_string();
+        }
+        else if index == 1 {
+            tuple_element_string = " (".to_string()+&first.to_string()+&"-".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.1.to_string()+&"\n".to_string();
+        }
+        else if index == 2 {
+            tuple_element_string = " (".to_string()+&second.to_string()+&"-".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.2.to_string()+&"\n".to_string();
+        }
+        else if index == 3 {
+            tuple_element_string = ": ".to_string()+&tuple_answers.3.to_string()+&"\n".to_string();
+        }
+        else if index == 4 {
+            tuple_element_string = " (".to_string()+&first.to_string()+&"/".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.4.to_string()+&"\n".to_string();
+        }
+        else if index == 5 {
+            tuple_element_string = " (".to_string()+&second.to_string()+&"/".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.5.to_string()+&"\n".to_string();
+        }
+        else if index == 6 {
+            tuple_element_string = " (".to_string()+&first.to_string()+&"%".to_string()+&second.to_string()+&"): ".to_string()+&tuple_answers.6.to_string()+&"\n".to_string();
+        }
+        else if index == 7 {
+            tuple_element_string = " (".to_string()+&second.to_string()+&"%".to_string()+&first.to_string()+&"): ".to_string()+&tuple_answers.7.to_string();
+        }
+
+        operation.to_string()+&tuple_element_string
     }
 
     pub fn convert_strings_to_ints(first: &str, second: &str) -> [i32; 2] {
